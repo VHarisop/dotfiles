@@ -48,10 +48,11 @@ set incsearch
 " pressing \d enables relative number display (useful for visual mode)
 nmap <leader>d :set relativenumber!<CR>
 
-" always display status line
+" always display status line + highlight current line
+set cursorline
 set laststatus=2
 
-" show some info on statusline
+" show much info on statusline
 set statusline=
 	\%F%m%r%h%w\ [format=%{&ff}]\ [type=%{&ft}]\ [%l,%v][%p%%]\ 
 	\%{strftime(\"%d/%m/%y\ -\ %H:%M\")}
@@ -73,13 +74,12 @@ au BufNewFile *.scala
 " reload files changed outside vim
 set autoread
 
-" default colorscheme
 colorscheme molokai
 
 " re-source file with \rr
 map <leader>rr :source ~/.vimrc<CR>
 
-" auto-indentation for pastes
+" indentation for pastes
 nnoremap p p=']<C-o>
 nnoremap P P=']<C-o>
 
