@@ -17,6 +17,7 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'derekwyatt/vim-scala'
 
 call neobundle#end()
 
@@ -24,7 +25,7 @@ call neobundle#end()
 filetype on
 filetype plugin on
 highlight Comment ctermfg=blue
-syntax on
+syntax enable
 
 " enable indentation features
 set smartindent
@@ -49,8 +50,15 @@ set smartcase
 " show matching parentheses 
 set showmatch
 
-" pressing \d enables relative number display (useful for visual mode)
-nmap <leader>d :set relativenumber!<CR>
+" lines fold after 79 characters
+set tw=79
+set formatoptions+=t
+
+" map navigation to not skip folded lines
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " display status line by default + highlight current line
 set cursorline
@@ -63,6 +71,9 @@ set statusline=
 
 " shortcut to turn statusline on and off using \s
 nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
+
+" use omnicompletion (C-x + C-o)
+set omnifunc=syntaxComplete#Complete
 
 " Use skeletons for certain file types 
 au BufNewFile *.c  r .vim/skeletons/skeleton.c
@@ -86,6 +97,10 @@ colorscheme molokai
 " re-source file with \rr
 map <leader>rr :source ~/.vimrc<CR>
 
+" pressing \d enables relative number display (useful for visual mode)
+nmap <leader>d :set relativenumber!<CR>
+
+
 " indentation for pastes
 nnoremap p p=']<C-o>
 nnoremap P P=']<C-o>
@@ -95,3 +110,8 @@ nmap <F3> :exec "color " . ((g:colors_name == "molokai") ? "jellybeans" : "molok
 
 " set off closing parentheses
 highlight MatchParen ctermbg=4
+
+" Load per-folder settings, if available
+if filereadable(".vim.custom")
+	so .vim.custom
+endif
