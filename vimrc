@@ -44,11 +44,15 @@ set history=1000
 
 " highlight results before Enter is pressed
 set incsearch 
+set smartcase
+
+" show matching parentheses 
+set showmatch
 
 " pressing \d enables relative number display (useful for visual mode)
 nmap <leader>d :set relativenumber!<CR>
 
-" always display status line + highlight current line
+" display status line by default + highlight current line
 set cursorline
 set laststatus=2
 
@@ -56,6 +60,9 @@ set laststatus=2
 set statusline=
 	\%F%m%r%h%w\ [format=%{&ff}]\ [type=%{&ft}]\ [%l,%v][%p%%]\ 
 	\%{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+
+" shortcut to turn statusline on and off using \s
+nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
 
 " Use skeletons for certain file types 
 au BufNewFile *.c  r .vim/skeletons/skeleton.c
