@@ -2,6 +2,7 @@ set nocompatible
 
 if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
+	set runtimepath+=~/.vim/neocomplete.vim/
 endif
 
 let g:neobundle#install_process_timeout=1500
@@ -18,8 +19,11 @@ NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'majutsushi/tagbar'
 
 call neobundle#end()
+
+" include merlin for code completion in ocaml
 
 " basic syntax stuff
 filetype on
@@ -73,7 +77,8 @@ set statusline=
 nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
 
 " use omnicompletion (C-x + C-o)
-set omnifunc=syntaxComplete#Complete
+set omnifunc=syntaxcomplete#Complete
+
 
 " Use skeletons for certain file types 
 au BufNewFile *.c  r .vim/skeletons/skeleton.c
@@ -108,8 +113,33 @@ nnoremap P P=']<C-o>
 " shortcut to switch between colorschemes (molokai / jellybeans)
 nmap <F3> :exec "color " . ((g:colors_name == "molokai") ? "jellybeans" : "molokai") <CR>
 
+" TagBar Settings
+" adjust window size for easier browsing
+let g:tagbar_width = 60
+
+" shortcut to toggle tag window
+nmap <F8> :TagbarToggle <CR>
+
 " set off closing parentheses
 highlight MatchParen ctermbg=4
+
+" neocomplete settings
+let g:neocomplete#enable_at_startup = 1
+
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#dictionary#dictionaries = {
+	\ 'default' : '',
+	\ 'vimshell': $HOME.'/.vimshell_hist',
+	\ }
+
+" Define keyword 
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" enable auto selection
+let g:neocomplete#enable_auto_select = 1
 
 " Load per-folder settings, if available
 if filereadable(".vim.custom")
