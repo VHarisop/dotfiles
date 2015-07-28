@@ -78,7 +78,7 @@ nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
 
 " use omnicompletion (C-x + C-o)
 set omnifunc=syntaxcomplete#Complete
-
+set autoread
 
 " Use skeletons for certain file types 
 au BufNewFile *.c  r .vim/skeletons/skeleton.c
@@ -94,10 +94,7 @@ au BufNewFile *.scala
 	\ exe "normal Oobject " . expand('%:t:r') . 
 	\ " {\ndef main(args: Array[String]) {\n\n}\n}"
 
-" reload files changed outside vim
-set autoread
 
-colorscheme molokai
 
 " re-source file with \rr
 map <leader>rr :source ~/.vimrc<CR>
@@ -105,27 +102,37 @@ map <leader>rr :source ~/.vimrc<CR>
 " pressing \d enables relative number display (useful for visual mode)
 nmap <leader>d :set relativenumber!<CR>
 
+" generate or delete ctags by filetype -> use correct extensions
+let g:ctags_languages = {
+	\	'c': 'c',
+	\   'python': 'py',
+	\   'perl': 'pl',
+	\   'java': 'java',
+	\   'scala': 'scala',
+	\   'ocaml': 'ml',
+	\   'matlab' : 'm'
+\ }
+
+nmap <leader>ct :exec "!ctags *." . (g:ctags_languages[&filetype]) <CR>
+nmap <leader>rt :exec "!rm tags" <CR>
 
 " indentation for pastes
 nnoremap p p=']<C-o>
 nnoremap P P=']<C-o>
 
+colorscheme molokai
 " shortcut to switch between colorschemes (molokai / jellybeans)
 nmap <F3> :exec "color " . ((g:colors_name == "molokai") ? "jellybeans" : "molokai") <CR>
 
 " TagBar Settings
 " adjust window size for easier browsing
 let g:tagbar_width = 60
-
-" shortcut to toggle tag window
 nmap <F8> :TagbarToggle <CR>
 
-" set off closing parentheses
 highlight MatchParen ctermbg=4
 
 " neocomplete settings
 let g:neocomplete#enable_at_startup = 1
-
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#dictionary#dictionaries = {
 	\ 'default' : '',
