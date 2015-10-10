@@ -20,6 +20,7 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'Raimondi/delimitMate'
 
 call neobundle#end()
 
@@ -30,6 +31,9 @@ filetype on
 filetype plugin on
 highlight Comment ctermfg=blue
 syntax enable
+
+" expand brackets on delimitMate
+let delimitMate_expand_cr = 1
 
 " enable indentation features
 set smartindent
