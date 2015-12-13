@@ -19,6 +19,12 @@ user_pref("devtools.debugger.remote-enabled");
 /* Disable browser access to the clipboard */
 user_pref("dom.event.clipboardevents.enabled", false);
 
+/* SharedWorker scope must be isolated to the URL bar domain.
+ * See:
+ * https://www.torproject.org/projects/torbrowser/design/#identifier-linkability 
+ */
+user_pref("dom.workers.sharedWorkers.enabled", false);
+
 /* Disable geolocation tracking */
 user_pref("geo.enabled", false);
 user_pref("geo.wifi.logging.enabled", false);
@@ -36,4 +42,3 @@ user_pref("network.http.spdy.enabled.v3-1", false);
 user_pref("network.dns.disablePrefetch", true);
 user_pref("network.prefetch-next", false);
 user_pref("security.OCSP.require", true);
-
