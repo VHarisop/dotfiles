@@ -21,6 +21,7 @@ NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'davidhalter/jedi-vim'
 
 call neobundle#end()
 
