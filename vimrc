@@ -23,6 +23,10 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'davidhalter/jedi-vim'
 
+" Asynchronous tag generation
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
+
 call neobundle#end()
 
 " include merlin for code completion in ocaml
