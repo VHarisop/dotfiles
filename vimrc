@@ -29,7 +29,9 @@ NeoBundle 'xolox/vim-misc'
 
 call neobundle#end()
 
-" include merlin for code completion in ocaml
+" Merlin Settings
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " basic syntax stuff
 filetype on
