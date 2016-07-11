@@ -105,6 +105,9 @@ au BufNewFile *.scala
 	\ exe "normal Oobject " . expand('%:t:r') . 
 	\ " {\ndef main(args: Array[String]) {\n\n}\n}"
 
+" Remove trailing whitespace automatically
+autocmd FileType c,cpp,java,php,python,ruby,haskell,ocaml,scala
+	\ autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 
 " re-source file with \rr
