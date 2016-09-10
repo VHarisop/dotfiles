@@ -31,3 +31,6 @@ t_push()
 {
 	[ -d .git ] && git push $1 testing
 }
+
+# Browsable dmesg output with colours
+alias hdmesg='dmesg --color=always | tail -R'
