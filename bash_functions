@@ -33,4 +33,4 @@ t_push()
 }
 
 # Browsable dmesg output with colours
-alias hdmesg='dmesg --color=always | tail -R'
+alias hdmesg='dmesg --color=always | less -R'
