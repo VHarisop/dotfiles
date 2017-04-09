@@ -34,7 +34,7 @@ t_push()
 
 # Update all outdated PyPI packages
 update_outdated_pip () {
-	pip list --outdated | tail -n +3 | awk -F ' ' '{print $1}' \
+	pip list --outdated --format=freeze | cut -d = -f 1 \
 		| xargs -n1 pip install -U
 }
 
