@@ -27,9 +27,15 @@ eclim_start() {
 # Usage: t_push <remote>
 # If inside a git repo, pushed to the testing branch
 # of the given remote
-t_push() 
+t_push()
 {
 	[ -d .git ] && git push $1 testing
+}
+
+# Update all outdated PyPI packages
+update_outdated_pip () {
+	pip list --outdated | tail -n +3 | awk -F ' ' '{print $1}' \
+		| xargs -n1 pip install -U
 }
 
 # Browsable dmesg output with colours
