@@ -38,5 +38,20 @@ update_outdated_pip () {
 		| xargs -n1 pip install -U
 }
 
+# Clean all .pyc files and __pycache__ directory
+cleanpyc () {
+	[ -d "__pycache__" ] && rm -r __pycache__
+	rm *.pyc
+}
+
+# Quick-and-dirty conversion of all mp3 files in a folder to
+# VBR 160k quality.
+convert_audio_vbr () {
+	for i in *.mp3; do
+		# Convert everything
+		ffmpeg -i "$i" -q:a 4 -threads 4 "${i%.*}_vbr.mp3";
+	done
+}
+
 # Browsable dmesg output with colours
 alias hdmesg='dmesg --color=always | less -R'
