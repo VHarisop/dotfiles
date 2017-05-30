@@ -32,8 +32,16 @@ t_push()
 	[ -d .git ] && git push $1 testing
 }
 
+# Update outdated PyPI packages in user-site
+update_user_outdated_pip () {
+	pip list --outdated --user --format=freeze | cut -d = -f 1 \
+		| xargs -n1 pip install -U --user
+}
+
 # Update all outdated PyPI packages
 update_outdated_pip () {
+	# First, update packages in user-site
+	update_user_outdated_pip && \
 	pip list --outdated --format=freeze | cut -d = -f 1 \
 		| xargs -n1 pip install -U
 }
